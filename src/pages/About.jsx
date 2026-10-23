@@ -3,6 +3,10 @@ import { CountUp } from '../components/CountUp'
 import { useSite } from '../hooks/useSite'
 import { usePageTitle } from '../hooks/usePageTitle'
 
+const portraits = Array.from({ length: 10 }, (_, index) => (
+  `/equipe/${String(index + 1).padStart(2, '0')}.jpg`
+))
+
 const valueIcons = {
   Innovation: 'bulb',
   Qualité: 'badge',
@@ -59,7 +63,17 @@ export function About() {
         <div className="wrap">
           <h2>Une équipe à l’écoute</h2>
           <p>{company.method}</p>
-          <img src="/hero/bureau.jpg" alt="Espace de travail WELL-CONSULTING" />
+          <div className="team-marquee" aria-label="Portraits">
+            <div className="team-track">
+              {[...portraits, ...portraits].map((src, index) => (
+                <img
+                  key={`${src}-${index}`}
+                  src={src}
+                  alt=""
+                />
+              ))}
+            </div>
+          </div>
           <Link className="btn btn-gold" to="/nous-rejoindre">Nous rejoindre</Link>
         </div>
       </section>
