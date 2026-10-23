@@ -19,7 +19,6 @@ export function About() {
   return (
     <>
       <PageHero
-        index="01"
         kicker="Qui sommes-nous"
         title="À propos de WELL-CONSULTING"
         text={company.tagline}
@@ -32,7 +31,7 @@ export function About() {
       </section>
       <section className="section section-tint">
         <div className="wrap split">
-          <SectionTitle index="01" kicker="Vision" title="La technologie comme levier accessible." text={company.vision} />
+          <SectionTitle kicker="Vision" title="La technologie comme levier accessible." text={company.vision} />
           <dl className="identity">
             {identity.map(([label, value]) => (
               <div key={label}>
@@ -45,7 +44,7 @@ export function About() {
       </section>
       <section className="section">
         <div className="wrap">
-          <SectionTitle index="06" kicker="Ce qui nous guide" title="Nos valeurs" />
+          <SectionTitle kicker="Ce qui nous guide" title="Nos valeurs" />
           <div className="values">
             {values.map((value) => (
               <article key={value.title}>

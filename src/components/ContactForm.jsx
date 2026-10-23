@@ -39,6 +39,11 @@ export function ContactForm() {
 
   return (
     <form className="form" onSubmit={onSubmit} noValidate={false}>
+      {feedback ? (
+        <p className={status === 'error' ? 'form-error' : 'form-success'} role="status">
+          {feedback}
+        </p>
+      ) : null}
       <div className="form-grid">
         <label className="field">
           <span>Nom</span>
@@ -63,20 +68,15 @@ export function ContactForm() {
       </label>
       <label className="field">
         <span>Message</span>
-        <textarea name="message" value={form.message} onChange={update} required minLength={10} maxLength={4000} rows={6} />
+        <textarea name="message" value={form.message} onChange={update} required minLength={10} maxLength={4000} rows={4} />
       </label>
       <label className="hp" aria-hidden="true">
         Site web
         <input name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={update} />
       </label>
-      <button className="btn btn-gold" type="submit" disabled={status === 'sending'}>
+      <button className="btn btn-blue" type="submit" disabled={status === 'sending'}>
         {status === 'sending' ? 'Envoi en cours…' : 'Envoyer le message'}
       </button>
-      {feedback ? (
-        <p className={status === 'error' ? 'form-error' : 'form-success'} role="status">
-          {feedback}
-        </p>
-      ) : null}
     </form>
   )
 }

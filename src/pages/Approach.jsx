@@ -11,7 +11,6 @@ export function Approach() {
   return (
     <>
       <PageHero
-        index="03"
         kicker="Comment nous travaillons"
         title="Notre démarche"
         text={company.method}
@@ -32,7 +31,6 @@ export function Approach() {
       <section className="section section-dark">
         <div className="wrap">
           <SectionTitle
-            index="04"
             kicker="Notre offre"
             title="Un projet livré en 4 phases"
             text="Chaque projet est découpé en phases claires et facturées de manière transparente, afin que le client sache précisément ce qui est réalisé à chaque étape."

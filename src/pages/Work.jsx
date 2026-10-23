@@ -10,7 +10,6 @@ export function Work() {
   return (
     <>
       <PageHero
-        index="09"
         kicker="Notre positionnement"
         title="Un partenaire technologique de bout en bout"
         text={company.positioning}
@@ -27,7 +26,7 @@ export function Work() {
       <section className="section section-tint">
         <div className="wrap stack">
           <header className="section-head">
-            <p className="kicker">08 · Nos réalisations</p>
+            <p className="kicker">Nos réalisations</p>
             <h2>Référence récente</h2>
           </header>
           {realizations.map((project) => (
@@ -52,7 +51,7 @@ export function Work() {
       <section className="section">
         <div className="wrap split">
           <header className="section-head">
-            <p className="kicker">07 · Terrains d’action</p>
+            <p className="kicker">Terrains d’action</p>
             <h2>Des projets internes, commerciaux, institutionnels ou entrepreneuriaux.</h2>
           </header>
           <ol className="plain-list">

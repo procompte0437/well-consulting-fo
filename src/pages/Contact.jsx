@@ -12,12 +12,11 @@ export function Contact() {
   return (
     <>
       <PageHero
-        index="Contact"
         kicker={company.name}
-        title="Parlons de votre projet."
-        text={company.tagline}
+        title="Obtenir un devis"
+        text="Décrivez votre projet : nature, délais et contexte. Nous revenons vers vous avec un avis et une estimation."
       />
-      <section className="section">
+      <section className="section section-tint">
         <div className="wrap contact-layout">
           <ContactForm />
           <aside className="contact-card">

@@ -1,13 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { CookieNotice } from './CookieNotice'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
 export function Layout() {
   const { pathname } = useLocation()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0)
+  }, [pathname])
+
+  useEffect(() => {
     const sections = document.querySelectorAll('main section')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -24,10 +28,7 @@ export function Layout() {
       })
     }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' })
 
-    sections.forEach((section) => {
-      section.classList.add('reveal')
-      observer.observe(section)
-    })
+    sections.forEach((section) => observer.observe(section))
 
     return () => observer.disconnect()
   }, [pathname])
@@ -40,6 +41,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <CookieNotice />
     </>
   )
 }

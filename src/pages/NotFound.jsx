@@ -9,7 +9,7 @@ export function NotFound() {
       <div className="wrap page-hero-inner">
         <p className="kicker light">404</p>
         <h1>Cette page n’existe pas.</h1>
-        <Link className="btn btn-gold" to="/">Retour à l’accueil</Link>
+        <Link className="btn btn-blue" to="/">Retour à l’accueil</Link>
       </div>
     </section>
   )
