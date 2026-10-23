@@ -11,8 +11,8 @@ const initialForm = {
   website: '',
 }
 
-export function ContactForm() {
-  const [form, setForm] = useState(initialForm)
+export function ContactForm({ defaultSubject = '' }) {
+  const [form, setForm] = useState({ ...initialForm, subject: defaultSubject })
   const [status, setStatus] = useState('idle')
   const [feedback, setFeedback] = useState('')
 
@@ -30,7 +30,7 @@ export function ContactForm() {
       const result = await sendContact(form)
       setStatus('success')
       setFeedback(result.message)
-      setForm(initialForm)
+      setForm({ ...initialForm, subject: defaultSubject })
     } catch (error) {
       setStatus('error')
       setFeedback(error.message)

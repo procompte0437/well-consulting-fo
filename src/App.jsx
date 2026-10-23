@@ -3,8 +3,11 @@ import { Layout } from './components/Layout'
 import { SiteProvider } from './context/SiteContext'
 import { About } from './pages/About'
 import { Approach } from './pages/Approach'
+import { ClientSpace } from './pages/ClientSpace'
 import { Contact } from './pages/Contact'
 import { Home } from './pages/Home'
+import { Join } from './pages/Join'
+import { Legal } from './pages/Legal'
 import { NotFound } from './pages/NotFound'
 import { Services } from './pages/Services'
 import { Work } from './pages/Work'
@@ -21,6 +24,10 @@ export default function App() {
             <Route path="demarche" element={<Approach />} />
             <Route path="realisations" element={<Work />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="espace-client" element={<ClientSpace />} />
+            <Route path="nous-rejoindre" element={<Join />} />
+            <Route path="conditions" element={<Legal />} />
+            <Route path="confidentialite" element={<Legal />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

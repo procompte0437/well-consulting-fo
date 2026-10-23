@@ -12,7 +12,6 @@ export function Home() {
   const { company, services, steps, phases, domains, realizations } = content
   const project = realizations[0]
   const [slide, setSlide] = useState(0)
-  const [motionOk, setMotionOk] = useState(false)
   usePageTitle('')
 
   const slides = [
@@ -44,22 +43,11 @@ export function Home() {
   ]
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => setMotionOk(!media.matches)
-    update()
-    media.addEventListener('change', update)
-    return () => media.removeEventListener('change', update)
-  }, [])
-
-  useEffect(() => {
-    if (!motionOk) return undefined
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setSlide((current) => (current + 1) % slides.length)
     }, SLIDE_MS)
-    return () => window.clearInterval(timer)
-  }, [motionOk, slides.length])
-
-  const current = slides[slide]
+    return () => window.clearTimeout(timer)
+  }, [slide, slides.length])
 
   return (
     <>
@@ -67,8 +55,18 @@ export function Home() {
         <div className="hero-curve" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <h1 className="display">{current.title}</h1>
-            <p className="lead">{current.text}</p>
+            <div className="hero-slides">
+              {slides.map((item, index) => (
+                <div
+                  key={item.title}
+                  className={`hero-slide${index === slide ? ' is-active' : ''}`}
+                  aria-hidden={index !== slide}
+                >
+                  <h1 className="display">{item.title}</h1>
+                  <p className="lead">{item.text}</p>
+                </div>
+              ))}
+            </div>
             <div className="hero-actions">
               <Link className="btn btn-blue" to="/a-propos">En savoir plus</Link>
               <Link className="btn btn-line" to="/contact">Nous contacter</Link>
@@ -83,12 +81,23 @@ export function Home() {
                   aria-label={item.title}
                   className={index === slide ? 'is-active' : ''}
                   onClick={() => setSlide(index)}
-                />
+                >
+                  {index === slide ? <span className="hero-dot-bar" /> : null}
+                </button>
               ))}
             </div>
           </div>
           <div className="hero-visual">
-            <img src={current.image} alt={current.alt} />
+            <div className="hero-frame">
+              {slides.map((item, index) => (
+                <img
+                  key={item.image}
+                  src={item.image}
+                  alt={index === slide ? item.alt : ''}
+                  className={index === slide ? 'is-active' : ''}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -8,8 +8,6 @@ export function Header() {
   const { content } = useSite()
   const [open, setOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  const phone = content.company.phone.replace(/[^\d+]/g, '')
-
   useEffect(() => {
     setOpen(false)
     setServicesOpen(false)
@@ -24,16 +22,18 @@ export function Header() {
     <div className="chrome">
       <div className="topbar">
         <div className="wrap topbar-inner">
-          <a href={`tel:${phone}`}>
-            <PhoneIcon />
-            {content.company.phone}
-          </a>
-          <a href={`mailto:${content.company.email}`}>
-            <MailIcon />
-            {content.company.email}
-          </a>
+          <NavLink to="/espace-client">
+            <UserIcon />
+            Espace client
+          </NavLink>
+          <span className="topbar-sep" aria-hidden="true" />
+          <NavLink to="/nous-rejoindre">
+            <JoinIcon />
+            Nous rejoindre
+          </NavLink>
+          <span className="topbar-sep" aria-hidden="true" />
           <NavLink to="/contact">
-            <PinIcon />
+            <PhoneIcon />
             Nous contacter
           </NavLink>
         </div>
@@ -71,18 +71,24 @@ export function Header() {
                 to="/services"
                 className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
                 aria-expanded={servicesOpen}
-                onClick={() => setServicesOpen(false)}
+                onClick={(event) => {
+                  if (window.matchMedia('(max-width: 760px)').matches) {
+                    event.preventDefault()
+                    setServicesOpen((value) => !value)
+                  } else {
+                    setServicesOpen(false)
+                  }
+                }}
               >
                 Nos services
                 <Caret />
               </NavLink>
-              <div className={`dropdown${open ? ' is-open' : ''}`}>
+              <div className={`dropdown${servicesOpen ? ' is-open' : ''}`}>
                 {content.services.map((service) => (
                   <NavLink key={service.number} to={`/services#service-${service.number}`} onClick={() => setOpen(false)}>
                     {service.title}
                   </NavLink>
                 ))}
-                <NavLink to="/demarche" onClick={() => setOpen(false)}>Notre démarche</NavLink>
               </div>
             </div>
 
@@ -98,6 +104,7 @@ export function Header() {
             <span className="lang" aria-label="Langue du site : français">
               <FrenchFlag />
               Français
+              <Caret />
             </span>
           </nav>
         </div>
@@ -122,18 +129,18 @@ function PhoneIcon() {
   )
 }
 
-function MailIcon() {
+function UserIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M4 6.5h16v11H4v-11Zm8 6.2 6.6-4.7H5.4L12 12.7Z" />
+      <path fill="currentColor" d="M12 12.2a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM5.4 19.4c.7-2.8 3.2-4.4 6.6-4.4s5.9 1.6 6.6 4.4c.2.6-.3 1.1-.9 1.1H6.3c-.6 0-1.1-.5-.9-1.1Z" />
     </svg>
   )
 }
 
-function PinIcon() {
+function JoinIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M12 3.5a6 6 0 0 0-6 6c0 4.4 6 11 6 11s6-6.6 6-11a6 6 0 0 0-6-6Zm0 8.2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4Z" />
+      <path fill="currentColor" d="M6 4.5h9.2L19 8.1V19.5H6v-15Zm8.2 1.3V8.4H17L14.2 5.8ZM8.2 12h7.6v1.3H8.2V12Zm0 3h5.2v1.3H8.2V15Z" />
     </svg>
   )
 }
